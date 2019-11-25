@@ -1,0 +1,250 @@
+ISO country code	country name	country name local	BCP language code
+AF	Afghanistan	د افغانستان اسلامي دولتدولت اسلامی افغانستان, جمهوری اسلامی افغانستان	fa, ps
+AX	Aland Islands	Åland	sv
+AL	Albania	Shqipëria	sq
+DZ	Algeria	الجزائر	ar
+AS	American Samoa	American Samoa	en, sm
+AD	Andorra	Andorra	ca
+AO	Angola	Angola	pt
+AI	Anguilla	Anguilla	en
+AQ	Antarctica	Antarctica, Antártico, Antarctique, Антарктике	en, es, fr, ru[1]
+AG	Antigua and Barbuda	Antigua and Barbuda	en
+AR	Argentina	Argentina	es
+AM	Armenia	Հայաստան	hy
+AW	Aruba	Aruba	nl, pap
+AU	Australia	Australia	en
+AT	Austria	Österreich	de
+AZ	Azerbaijan	Azərbaycan	az
+BS	Bahamas	Bahamas	en
+BH	Bahrein	البحرين	ar
+BD	Bangladesh	গণপ্রজাতন্ত্রী বাংলাদেশ	bn
+BB	Barbados	Barbados	en
+BY	Belarus	Беларусь	be, ru
+BE	Belgium	België, Belgique, Belgien	nl, fr, de
+BZ	Belize	Belize	en
+BJ	Benin	Bénin	fr
+BM	Bermuda	Bermuda	en
+BT	Bhutan	འབྲུག་ཡུལ	dz
+BO	Bolivia	Bolivia, Bulibiya, Volívia, Wuliwya	es, qu, gn, ay
+BA	Bosnia and Herzegovina	Bosna i Hercegovina	bs, hr, sr
+BW	Botswana	Botswana	en, tn
+BV	Bouvet Island	Bouvetøya	no
+BR	Brazil	Brasil	pt
+IO	British Indian Ocean Territory	British Indian Ocean Territory	en
+VG	British Virgin Islands	British Virgin Islands	en
+BN	Brunei Darussalam	Brunei Darussalam	ms
+BG	Bulgaria	България	bg
+BF	Burkina Faso	Burkina Faso	fr
+BI	Burundi	Burundi	fr
+CV	Cabo Verde	Cabo Verde	pt
+KH	Cambodia	កម្ពុជា	km
+CM	Cameroon	Cameroun, Cameroon	fr, en
+CA	Canada	Canada	en, fr
+BQ	Caribbean Netherlands	Caribisch Nederland	nl
+KY	Cayman Islands	Cayman Islands	en
+CF	Centrafrican Republic	République centrafricaine, Ködörösêse tî Bêafrîka	fr, sg
+TD	Chad	Tchad, تشاد	fr, ar
+CL	Chile	Chile	es
+CN	China	中国	zh-hans
+CX	Christmas Island	Christmas Island	en
+VA	City of the Vatican	Città del Vaticano	it
+CC	Cocos (Keeling) Islands	Cocos (Keeling) Islands	en
+CO	Colombia	Colombia	es
+KM	Comores	ﺍﻟﻘﻤﺮي, Comores, Komori	ar, fr, sw
+CK	Cook Islands	Cook Islands, Kūki ʻĀirani	en, rar
+CR	Costa Rica	Costa Rica	es
+HR	Croatia	Hrvatska	hr
+CU	Cuba	Cuba	es
+CW	Curaçao	Curaçao	nl, en
+CY	Cyprus	Κύπρος, Kibris	el, tr
+CZ	Czech Republic	Česká republika	cs
+CI	Côte d'Ivoire	Côte d'Ivoire	fr
+CD	Democratic Republic of the Congo (Congo-Kinshasa, former Zaire)	République Démocratique du Congo	fr
+DK	Denmark	Danmark	da
+DJ	Djibouti	Djibouti, جيبوتي, Jabuuti, Gabuutih	fr, ar, so, aa
+DM	Dominica	Dominica	en
+DO	Dominican Republic	República Dominicana	es
+EC	Ecuador	Ecuador	es
+EG	Egypt	مصر	ar
+SV	El Salvador	El Salvador	es
+GQ	Equatorial Guinea	Guiena ecuatorial, Guinée équatoriale, Guiné Equatorial	es, fr, pt
+ER	Eritrea	ኤርትራ, إرتريا, Eritrea	ti, ar, en
+EE	Estonia	Eesti	et
+ET	Ethiopia	ኢትዮጵያ, Itoophiyaa	am, om
+FK	Falkland Islands	Falkland Islands	en
+FO	Faroe Islands	Føroyar, Færøerne	fo, da
+FJ	Fiji	Fiji	en
+FI	Finland	Suomi	fi, sv, se
+FR	France	France	fr
+GF	French Guiana	Guyane française	fr
+PF	French Polynesia	Polynésie française	fr
+TF	French Southern and Antarctic Lands	Terres australes et antarctiques françaises	fr
+GA	Gabon	Gabon	fr
+GE	Georgia	საქართველო	ka
+DE	Germany	Deutschland	de
+GH	Ghana	Ghana	en
+GI	Gibraltar	Gibraltar	en
+GR	Greece	Ελλάδα	el
+GL	Greenland	Kalaallit Nunaat, Grønland	kl, da
+GD	Grenada	Grenada	en
+GP	Guadeloupe	Guadeloupe	fr
+GU	Guam	Guam, Guåhån	en, ch
+GT	Guatemala	Guatemala	es
+GG	Guernsey	Guernsey	en
+GN	Guinea	Guinée	fr
+GW	Guinea Bissau	Guiné-Bissau	pt
+GY	Guyana	Guyana	en
+HT	Haiti	Haïti, Ayiti	fr, ht
+HM	Heard Island and McDonald Islands	Heard Island and McDonald Islands	en
+HN	Honduras	Honduras	es
+HK	Hong Kong (SAR of China)	香港, Hong Kong	zh-hant, en
+HU	Hungary	Magyarország	hu
+IS	Iceland	Ísland	is
+IN	India	भारत, India	hi, en
+ID	Indonesia	Indonesia	id
+IR	Iran	ایران	fa
+IQ	Iraq	العراق, Iraq	ar, ku
+IE	Ireland	Ireland, Éire	en, ga
+IM	Isle of Man	Isle of Man	en
+IL	Israel	ישראל	he
+IT	Italy	Italia	it, de, fr
+JM	Jamaica	Jamaica	en
+JP	Japan	日本	ja
+JE	Jersey	Jersey	en
+JO	Jordan	الأُرْدُن	ar
+KZ	Kazakhstan	Қазақстан, Казахстан	kk, ru
+KE	Kenya	Kenya	sw, en
+KI	Kiribati	Kiribati	en
+KW	Kuweit	الكويت	ar
+KG	Kyrgyzstan	Кыргызстан, Киргизия	ky, ru
+LA	Laos	ປະຊາຊົນລາວ	lo
+LV	Latvia	Latvija	lv
+LB	Lebanon	لبنان, Liban	ar, fr
+LS	Lesotho	Lesotho	en, st
+LR	Liberia	Liberia	en
+LY	Libya	ليبيا	ar
+LI	Liechtenstein	Liechtenstein	de
+LT	Lithuania	Lietuva	lt
+LU	Luxembourg	Lëtzebuerg, Luxembourg, Luxemburg	lb, fr, de
+MO	Macao (SAR of China)	澳門, Macau	zh-hant, pt
+MK	Macedonia (Former Yugoslav Republic of)	Македонија	mk
+MG	Madagascar	Madagasikara, Madagascar	mg, fr
+MW	Malawi	Malawi	en, ny
+MY	Malaysia		ms
+MV	Maldives		dv
+ML	Mali	Mali	fr
+MT	Malta	Malta	mt, en
+MH	Marshall Islands	Marshall Islands	en, mh
+MQ	Martinique	Martinique	fr
+MR	Mauritania	موريتانيا, Mauritanie	ar, fr
+MU	Mauritius	Maurice, Mauritius	mfe, fr, en
+YT	Mayotte	Mayotte	fr
+MX	Mexico	México	es
+FM	Micronesia (Federated States of)	Micronesia	en
+MD	Moldova	Moldova, Молдавия	ro, ru, uk
+MC	Monaco	Monaco	fr
+MN	Mongolia	Монгол Улс	mn
+ME	Montenegro	Crna Gora, Црна Гора	srp, sr, hr, bs, sq
+MS	Montserrat	Montserrat	en
+MA	Morocco	Maroc, ⵍⵎⵖⵔⵉⴱ, المغرب	fr, zgh, ar
+MZ	Mozambique	Mozambique	pt
+MM	Myanmar	မြန်မာ	my
+NA	Namibia	Namibia	en, sf, de
+NR	Nauru	Nauru	na, en
+NP	Nepal		ne
+NC	New Caledonia	Nouvelle-Calédonie	fr
+NZ	New Zealand	New Zealand	mi, en
+NI	Nicaragua	Nicaragua	es
+NE	Niger	Niger	fr
+NG	Nigeria	Nigeria	en
+NU	Niue	Niue	niu, en
+NF	Norfolk Island	Norfolk Island	en, pih
+KP	North Korea	북조선	ko
+MP	Northern Mariana Islands	Northern Mariana Islands	en, ch
+NO	Norway	Norge, Noreg	nb, nn, no, se
+OM	Oman	سلطنة عُمان	ar
+PK	Pakistan	پاکستان	en, ur
+PW	Palau	Palau	en, pau, ja, sov, tox
+PS	Palestinian Territory	Palestinian Territory	ar, he
+PA	Panama	Panama	es
+PG	Papua New Guinea	Papua New Guinea	en, tpi, ho
+PY	Paraguay	Paraguay	es, gn
+PE	Peru	Perú	es
+PH	Philippines	Philippines	en, tl
+PN	Pitcairn	Pitcairn	en, pih
+PL	Poland	Polska	pl
+PT	Portugal	Portugal	pt
+PR	Puerto Rico	Puerto Rico	es, en
+QA	Qatar	قطر	ar
+CG	Republic of the Congo (Congo-Brazzaville)	République du Congo	fr
+RE	Reunion	La Réunion	fr
+RO	Romania	România	ro
+RU	Russia	Россия	ru
+RW	Rwanda	Rwanda	rw, fr, en
+SH	Saint Helena	Saint Helena	en
+KN	Saint Kitts and Nevis	Saint Kitts and Nevis	en
+LC	Saint Lucia	Saint Lucia	en
+SX	Saint Martin (Dutch part)	Sint Maarten	nl, en
+MF	Saint Martin (French part)	Saint-Martin	fr
+PM	Saint Pierre and Miquelon	Saint-Pierre-et-Miquelon	fr
+VC	Saint Vincent and the Grenadines	Saint Vincent and the Grenadines	en
+BL	Saint-Barthélemy	Saint-Barthélemy	fr
+WS	Samoa	Samoa	sm, en
+SM	San Marino	San Marino	it
+SA	Saudi Arabia	السعودية	ar
+RS	Serbia	Србија	sr, sr-Latn
+SC	Seychelles	Seychelles	fr, en, crs
+SL	Sierra Leone	Sierra Leone	en
+SG	Singapore	Singapore	zh-hans, en, ms, ta
+SK	Slovakia	Slovensko	sk
+SI	Slovenia	Slovenija	sl
+SB	Solomon Islands	Solomon Islands	en
+SO	Somalia	Somalia, الصومال	so, ar
+ZA	South Africa	South Africa	en, af, st, tn, xh, zu
+GS	South Georgia and the South Sandwich Islands	South Georgia and the South Sandwich Islands	en
+KR	South Korea	대한민국	ko, en
+SS	South Sudan	South Sudan	en
+ES	Spain	España	ast, ca, es, eu, gl
+LK	Sri Lanka	ශ්‍රී ලංකා, இலங்கை	si, ta
+SD	Sudan	السودان	ar, en
+SR	Suriname	Suriname	nl
+SJ	Svalbard and Jan Mayen	Svalbard and Jan Mayen	no
+SZ	Swaziland	Swaziland	en, ss
+SE	Sweden	Sverige	sv
+CH	Switzerland	Schweiz, Suisse, Svizzera, Svizra	de, fr, it, rm
+SY	Syria	سوريا, Sūriyya	ar
+ST	São Tomé and Príncipe	São Tomé e Príncipe	pt
+SN	Sénégal	Sénégal	fr
+TW	Taiwan	Taiwan	zh-hant
+TJ	Tajikistan	,	tg, ru
+TZ	Tanzania	Tanzania	sw, en
+TH	Thailand	ประเทศไทย	th
+GM	The Gambia	The Gambia	en
+NL	The Netherlands	Nederland	nl
+TL	Timor-Leste	Timor-Leste, Timor Lorosa'e	pt, tet
+TG	Togo	Togo	fr
+TK	Tokelau	Tokelau	tkl, en, sm
+TO	Tonga	Tonga	en
+TT	Trinidad and Tobago	Trinidad and Tobago	en
+TN	Tunisia	تونس, Tunisie	ar, fr
+TR	Turkey	Türkiye	tr
+TM	Turkmenistan	Türkmenistan	tk
+TC	Turks and Caicos Islands	Turks and Caicos Islands	en
+TV	Tuvalu	Tuvalu	en
+UG	Uganda	Uganda	en, sw
+UA	Ukraine	Україна	uk
+AE	United Arab Emirates	دولة الإمارات العربيّة المتّحدة	ar
+GB	United Kingdom	United Kingdom	en, ga, cy, gd, kw
+UM	United States Minor Outlying Islands	United States Minor Outlying Islands	en
+US	United States of America	United States of America	en
+VI	United States Virgin Islands	United States Virgin Islands	en
+UY	Uruguay	Uruguay	es
+UZ	Uzbekistan		uz, kaa
+VU	Vanuatu	Vanuatu	bi, en, fr
+VE	Venezuela	Venezuela	es
+VN	Vietnam	Việt Nam	vi
+WF	Wallis and Futuna	Wallis-et-Futuna	fr
+EH	Western Sahara	Sahara Occidental	ar, es, fr
+YE	Yemen	اليَمَن	ar
+ZM	Zambia	Zambia	en
+ZW	Zimbabwe	Zimbabwe	en, sn, nd

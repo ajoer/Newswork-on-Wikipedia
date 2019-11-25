@@ -1,41 +1,32 @@
 #!/usr/bin/python3
+"""
 
-import argparse
-import json
+	Preprocesses Wikipedia data.
+
+	a.k.jorgensen@uva.nl
+	November 2019
+
+"""
 import nltk
 
-from get_data import save_to_json
+from collections import defaultdict
 
-parser = argparse.ArgumentParser(description='Preprocess Wikipedia data, e.g. images, text, links, revisions')
-parser.add_argument("--titles", default="brexit", help="title of a Wikipedia page, str, e.g. 'Brexit'.")
-parser.add_argument("--languages", default="no", help="two letter language code, str, e.g. 'en'.")
-parser.add_argument("--date", default="191115", help="six digit date of Wikipedia scrape, str, e.g. '191115'.")
-parser.add_argument("--save", default="n", help="save to location, str, 'y' or 'n'.")
-
-args = parser.parse_args()
-
-
-def process_categories(categories_list):
+def preprocess_categories(categories_list):
 	''' clean the label "category" off the categories '''
 
 	clean_categories = []
-
 	for category in categories_list:
 		category = category.split(":",1)[1:]
-		clean_categories.append(category)
-
+		clean_categories.append(''.join(category))
 	return clean_categories
 
-def process_content(content):
+def preprocess_content(content):
 	''' tokenizes and lower cases '''
 
-	nltk.word_tokenize(content)
-	clean_content = ' '.join(x.lower() for x in content)
+	content = nltk.word_tokenize(content)
+	return ' '.join(content)
 
-	return clean_content
-
-
-def process_images(image_list):
+def preprocess_images(image_list):
 	''' the images have an .upload. name in Wikipedia, 
 	but the url to their location in Wikimedia is different.'''
 
@@ -52,20 +43,42 @@ def process_images(image_list):
 
 	return clean_image_urls
 
-def process_rawWiki():
+def preprocess_references(references_list):
+	''' clean the "https://" or "http://" off the references '''	
+	clean_references = []
+	for reference in references_list:
+		if not reference.startswith("http"):
+			print("Here's a reference which is not a link:\t", reference)
+		else:
+			reference = reference.split("//")[-1]
+			clean_references.append(reference)
 
-	for language in args.languages.split(','):
-		for title in args.titles.split(','):
-			json_file = open('./output/raw/%s_%s_%s_raw.json' % (title, language, args.date))
+	return clean_references
 
-			data = json.load(json_file)
-			data['categories'] = process_categories(data['categories'])
-			data['content'] = process_content(data['content'])
-			data['images'] = process_images(data['images'])
+def get_references_from_revisions(revisions):
+	''' pulls the references out of the content of a revision history 
+		output = dict with list of references at each revision timestamp '''
 
-			if args.save == "y":
-		 		save_to_json(data, title, language, "processed")
+	revision_references = defaultdict()
+	for rev in revisions:
+		references = []
+		timestamp = rev["timestamp"]
+		content = rev["slots"]["main"]["*"]
+		content = preprocess_content(content)
+		
+		for word in content.strip().split():
+			if word.startswith("//www."):
+				reference = word[6:]
+				references.append(reference)
 
-process_rawWiki()
+		revision_references[timestamp] = references
+	return revision_references
+
+if __name__ == "__main__":
+	process_categories()
+	process_content()
+	process_images()
+	preprocess_references()
+	get_references_from_revisions()
 
 

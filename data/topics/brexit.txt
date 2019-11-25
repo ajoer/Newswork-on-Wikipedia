@@ -1,0 +1,7 @@
+da	Brexit
+no	Brexit
+nl	Brexit
+sv	Brexit
+is	Brexit
+de	Brexit
+en	Brexit
