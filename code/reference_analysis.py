@@ -6,10 +6,10 @@
 import argparse
 import glob
 import general
-import preprocess
+import process_revision
 import visualize
 
-from collections import Counter, defaultdict
+from collections import Counter, OrderedDict
 from enum import Enum
 
 parser = argparse.ArgumentParser(description='Process JSON file containing Wikipedia dumps.')
@@ -18,16 +18,6 @@ parser.add_argument("--language", help="language code(s), str")
 
 args = parser.parse_args()
 
-# output:
-# ----  the input is the list of references, just need to split them into categories. ------
-## news, language, non_news, non_language = sets of references
-## counter of domains
-## counter of TLDs 
-
-## right now, nws 
-
-
-#list of languages that have other letter combinations for domain
 language_domain = {
 	"da": "dk",
 	"en": "uk",
@@ -36,107 +26,116 @@ language_domain = {
 	"sv": "se"
 }
 
-def reference_types(language, timestamp, news_sources, list_of_references):
+news_sources = []
+for news_file in glob.glob("data/news_sources/*.txt"):
+	for news_source in open(news_file).read().strip().split():
+		news_sources.append(news_source)
 
-	domain_counter = Counter() # counter of domains, e.g. google.com
-	tld_counter = Counter() # counter of top-level domain, e.g. com
+def get_domain(reference):
+	domain = reference.split('/')[0]
+	if domain.startswith("www"):
+		domain = domain[4:]
 
-	news = Counter() # counter of links that have a domain in the news list
-	local = Counter() # counter of links that have a national/language tld or have the language specified in the url
+	tld = domain.split('.')[-1]
+	return domain, tld
+
+def check_local(tld, reference, language):
+	if tld == language or "/"+language+"/" in reference:
+		return True
+
+	elif language in language_domain.keys():
+		if tld == language_domain[language]:
+			return True
+
+def get_local_news(local, news):
 	local_news = Counter() # counter of links that are in the news and local counters simultaneously
-
-
-	for reference in list_of_references:
-
-		domain = reference.split('/')[0]
-		if domain.startswith("www"):
-			domain = domain[4:]
-		domain_counter[domain] += 1
-		
-		tld = domain.split('.')[-1]
-		tld_counter[tld] += 1
-
-		# Local domains
-		if tld == language or "/"+language+"/" in reference:
-			local[reference] += 1
-
-		elif language in language_domain.keys():
-			if tld == language_domain[language]:
-				local[reference] += 1
-
-		# news domains
-		if domain in news_sources:
-			news[reference] += 1
 
 	local_keys = {x for x in local.keys()}
 	news_keys = {x for x in news.keys()}
+
 	for key in local_keys.intersection(news_keys):
 		local_news[key] = local[key]
-		if local[key] != news[key]:
-			print("they dont match:\t", local[key], news[key])
+		del local[key]
+		del news[key]
 
-	#if len(list_of_references) > 0:
-	#	print("local_news makes up %s percent of the references, of which there are %s" % (round((len(local_news) / len(list_of_references) *100),2), len(list_of_references)))
-	# print("domain_counter", sum(domain_counter.values()))
-	# print("tld_counter", sum(tld_counter.values()))
-	# print("local", sum(local.values()))
-	# print("news", sum(news.values()))
+	# what is left in news is now foreign
+	return local, news, local_news
 
-	return domain_counter, tld_counter, local, news, local_news
+def reference_types(language, news_sources, references):
+	''' Assign type to each reference, either local, news, '''
 
+	num_of_domains = 0 # counter of domains, e.g. google.com
+
+	news = Counter() # counter of links that have a domain in the news list
+	local = Counter() # counter of links that have a national/language tld or have the language specified in the url
+	foreign = Counter() # counter of links that are neither news nor local
+
+	for reference in references:
+
+		if reference is not None:
+
+			domain, tld = get_domain(reference)
+			num_of_domains += 1
+
+			# local
+			local_true = check_local(tld, reference, language)
+			if local_true: local[reference] += 1
+		
+			# news
+			news_true = domain not in news_sources
+			if news_true: news[reference] += 1
+
+			# foreign non-news
+			if not local_true and not news_true: foreign[reference] += 1
+
+	# remove local news from 'news' and 'local', and assign to 'local_news'. Rest of 'news' is 'foreign_news'
+	local, foreign_news, local_news = get_local_news(local, news)
+
+	return num_of_domains, local, foreign, local_news, foreign_news
+
+def get_references(revisions):
+	''' Get references from the content of a revision. Output is a dictionary of references per timestamp. '''
+	revision_references = dict()
+
+	for rev in revisions:
+		try:
+
+			timestamp = rev["timestamp"]
+			references = process_revision.process_revision(rev, elements="revision_references")
+			
+			if references is not None:
+				revision_references[timestamp] = references
+
+		except KeyError:
+			pass
+
+	return revision_references
 
 def main():
-	
-	input_files = glob.glob("output/processed/%s/*.json" % args.topic)
 
-	for file_name in sorted(input_files):
+	for data, language in general.open_data("processed", args.topic):
 
-		data = general.read_from_json(file_name)
-		language = file_name.split('/')[-1].split('_')[-2]
+		num_of_domains = Counter()
 
-		print("\nLanguage:\t", language)
-		print("Title:\t\t", args.topic)
+		local = OrderedDict()
+		foreign = OrderedDict()
+		local_news = OrderedDict()
+		foreign_news = OrderedDict()
 
-		news_files = glob.glob("data/news_sources/*.txt")
-		news_sources = []
-		for news_file in news_files:
-			for x in open(news_file).read().strip().split():
-				news_sources.append(x)
-		
-		# dictionaries with reference information per timestamp
-		dict_of_domain_counters = defaultdict()
-		dict_of_tld_counters = defaultdict()
-		dict_of_local_counters = defaultdict()
-		dict_of_news_counters = defaultdict()
-		dict_of_localnews_counters = defaultdict()
+		revisions = data['revisions']
+		references = get_references(revisions)
 
-		# latest
-		timestamp = data["_TODAY_"]
-		domain_counter, tld_counter, local, news, local_news = reference_types(language, timestamp, news_sources, data['references'])
-		
-		dict_of_domain_counters[timestamp] = domain_counter
-		dict_of_tld_counters[timestamp] = tld_counter
-		dict_of_local_counters[timestamp] = local
-		dict_of_news_counters[timestamp] = news
-		dict_of_localnews_counters[timestamp] = local_news
-		
-		# revisions
-		revisions = data['revision_references']
-		for rev in revisions:
-			timestamp = rev
-			domain_counter, tld_counter, local, news, local_news = reference_types(language, rev, news_sources, revisions[rev])
+		for timestamp in references:
+			d, l, f, ln, fn = reference_types(language, news_sources, references[timestamp])
 
-			dict_of_domain_counters[timestamp] = domain_counter
-			dict_of_tld_counters[timestamp] = tld_counter
-			dict_of_local_counters[timestamp] = local
-			dict_of_news_counters[timestamp] = news
-			dict_of_localnews_counters[timestamp] = local_news
-		
-		print(50*"*")
-		print(len(dict_of_domain_counters.keys()))
-		#visualize.diachronic_distribution_references(args.topic, language, dict_of_news_counters, dict_of_local_counters, dict_of_localnews_counters, dict_of_domain_counters)
+			num_of_domains[timestamp] = d
+
+			local[timestamp] = l
+			foreign[timestamp] = f
+			local_news[timestamp] = ln
+			foreign_news[timestamp] = fn
+
+		visualize.reference_dist_diachronic(args.topic, language, num_of_domains, local, foreign, local_news, foreign_news)
 
 if __name__ == "__main__":
 	main()
-
-

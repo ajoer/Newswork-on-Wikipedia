@@ -1,13 +1,14 @@
 #!/usr/bin/python3
 """
 
-	Preprocesses Wikipedia data.
+	Modules for preprocessesing Wikipedia data, e.g. for temporal analysis using revision history. 
 
 	a.k.jorgensen@uva.nl
-	November 2019
+	December 2019
 
 """
 import nltk
+import re
 
 from collections import defaultdict
 
@@ -54,31 +55,11 @@ def preprocess_references(references_list):
 			clean_references.append(reference)
 
 	return clean_references
-
-def get_references_from_revisions(revisions):
-	''' pulls the references out of the content of a revision history 
-		output = dict with list of references at each revision timestamp '''
-
-	revision_references = defaultdict()
-	for rev in revisions:
-		references = []
-		timestamp = rev["timestamp"]
-		content = rev["slots"]["main"]["*"]
-		content = preprocess_content(content)
-		
-		for word in content.strip().split():
-			if word.startswith("//www."):
-				reference = word[6:]
-				references.append(reference)
-
-		revision_references[timestamp] = references
-	return revision_references
-
+	
 if __name__ == "__main__":
 	process_categories()
 	process_content()
 	process_images()
-	preprocess_references()
-	get_references_from_revisions()
+	process_references()
 
 

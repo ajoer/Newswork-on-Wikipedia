@@ -1,2 +1,2 @@
-da	Danmark
+da	Informationsteknologi
 nl	Raymond Poulidor

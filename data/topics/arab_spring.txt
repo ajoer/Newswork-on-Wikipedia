@@ -1,0 +1,13 @@
+en	Arab Spring
+da	Protesterne i den arabiske verden 2010-2011
+fr	Printemps arabe
+nl	Arabische Lente
+sv	Arabiska våren
+no	Den arabiske våren
+es	Primavera Árabe
+zea	Araobische Revolutie
+tr	Arap Baharı
+de	Arabischer Frühling
+pt	Primavera Árabe
+pl	Arabska wiosna
+ar	الربيع العربي

@@ -4,3 +4,11 @@ nl	Europese vluchtelingencrisis
 sv	Migrationskrisen i Europa
 de	Flüchtlingskrise in Europa ab 2015
 en	European migrant crisis
+fr	Crise migratoire en Europe
+it	Crisi europea dei migranti
+hr	Europska migracijska kriza 2015.
+tr	Avrupa sığınmacı krizi
+es	Crisis migratoria en Europa
+pt	Crise migratória na Europa
+pl	Kryzys migracyjny w Europie
+fi	Euroopan pakolaiskriisi
