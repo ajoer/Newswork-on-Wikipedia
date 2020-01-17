@@ -11,6 +11,8 @@ import os
 import preprocess
 import re
 
+import dataclasses
+
 from urllib.request import urlopen
 from Wikipedia.wikipedia import wikipedia
 from Wikipedia.wikipedia import exceptions
@@ -77,7 +79,7 @@ def main():
 
 	for line in sorted(input_data):
 		language, title = line.split('\t')[0], line.split('\t')[1].strip()
-
+		
 		print("\nLanguage:\t", language)
 		print("Title:\t\t", title)
 

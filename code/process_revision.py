@@ -10,6 +10,7 @@
 import nltk
 import preprocess
 import re
+import string
 
 def get_clickables(content):
 	''' gets all clickable objects out of the content of a revision history timestamp. '''
@@ -17,7 +18,7 @@ def get_clickables(content):
 	categories = []
 	images = []
 	languages = []
-	links = []	# Get all clickable objects
+	links = []
 	exp = re.compile("\[ \[ [A-Za-z0-9.|()-:' ëé]* \] \]") #-.|():' ëé
 	clickables = exp.findall(content)
 
@@ -124,6 +125,21 @@ def process_revision(revision, elements="all"):
 	elif elements == "revision_references":
 		references = get_references(content)
 		return references 
+
+	elif elements == "content":
+		
+		references = get_references(content)
+		clean_content = []
+		for element in content.split(" "):
+			
+			if element[0] not in string.punctuation and element not in images+references and not element[0].isdigit() and bot not in element.lower() and "=" not in element and "htt" not in element.lower() and "jpg" not in element.lower():
+				punct = 0
+				for el in element:
+					if el in string.punctuation:
+						punct += 1
+				if punct == 0:
+					clean_content.append(element)
+		return clean_content
 
 	else:
 		section_hierarchy, number_of_sections = get_section_titles(content)

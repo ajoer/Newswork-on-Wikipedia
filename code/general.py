@@ -51,6 +51,7 @@ def save_pois_to_tsv(en_title, language, tsv_output, filetype):
 	file_name.close()
 
 def open_data(filetype, topic):
+
 	input_files = glob.glob("output/%s/%s/*.json" % (filetype, topic))
 
 	for file_name in sorted(input_files):
