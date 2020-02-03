@@ -238,25 +238,25 @@ def process_revision():
 
 			for n, revision in enumerate(revisions):
 				processed_data = defaultdict()
-					timestamp = revision["timestamp"]
-					content = revision["slots"]["main"]["*"]
+				timestamp = revision["timestamp"]
+				content = revision["slots"]["main"]["*"]
 
-					#remove all valuable aspects from the content, before cleaning the text
-					content, tlds_origin, reference_template_types = get_references(content)
-					content, images, captions, links_from_captions = extract_images(content)
-					content, links, categories = get_links_categories(content)
-					links += links_from_captions
-					content, sections = extract_sections(content)
-					content = clean_text(content) 
+				#remove all valuable aspects from the content, before cleaning the text
+				content, tlds_origin, reference_template_types = get_references(content)
+				content, images, captions, links_from_captions = extract_images(content)
+				content, links, categories = get_links_categories(content)
+				links += links_from_captions
+				content, sections = extract_sections(content)
+				content = clean_text(content) 
 
-					processed_data["tlds_origin"] = tlds_origin
-					processed_data["reference_template_types"] = reference_template_types
-					processed_data["images"] = images
-					processed_data["captions"] = captions
-					processed_data["links"] = links
-					processed_data["categories"] = categories
-					processed_data["sections"] = sections
-					processed_data["content"] = content
+				processed_data["tlds_origin"] = tlds_origin
+				processed_data["reference_template_types"] = reference_template_types
+				processed_data["images"] = images
+				processed_data["captions"] = captions
+				processed_data["links"] = links
+				processed_data["categories"] = categories
+				processed_data["sections"] = sections
+				processed_data["content"] = content
 
 				output_data[timestamp] = processed_data	
 			general.save_to_json(args.topic, language, output_data, "processed")
