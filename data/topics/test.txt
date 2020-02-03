@@ -1,2 +1,3 @@
-da	Informationsteknologi
-nl	Raymond Poulidor
+nl, Raymond Poulidor
+da, Jordskælvet i Elazığ 2020
+en, 23rd (Northumbrian) Division
