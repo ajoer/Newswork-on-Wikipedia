@@ -7,6 +7,7 @@ import glob
 import json
 import os
 
+
 def read_from_json(filename):
 	''' read from json file if the file exists '''
 
@@ -64,8 +65,16 @@ def open_data(filetype, topic):
 
 		yield data, language
 
+def check_if_exists(filetype, en_title, language):
+	
+	directory_name = "output/%s/%s/" % (filetype, en_title)
+	file_name = directory_name + "%s_%s_%s.json" % (en_title, language, filetype)
+	
+	return os.path.isfile(file_name)
+
 if __name__ == '__main__':
 	open_data()
 	read_from_json()
 	save_to_json()
 	save_pois_to_tsv()
+	check_if_exists()

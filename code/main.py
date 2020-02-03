@@ -26,7 +26,7 @@ parser = argparse.ArgumentParser(description='''Extracts and preprocesses Wikipe
 						Output is a dictionary with (partly preprocessed) content for the language-topic pair. 
 						This dictionary also has a field "revisions" with a dictionary of the entitre revision history.''')
 parser.add_argument("topic", help="name of txt file with tab separated language, title pairs, e.g. 'refugee_crisis'.")
-parser.add_argument("--save", default="y", help="save to location, str, 'y' or 'n'.")
+parser.add_argument("--save_raw", default="n", help="save raw to location, str, 'y' or 'n'.")
 
 args = parser.parse_args()
 
@@ -62,10 +62,10 @@ def get_wiki_data(language, title):
 
 		data["revisions"] = page.revisions
 		print("there are %d revisions for %s" % ( len(data["revisions"]), title))
-		
+	
 		if page.coordinates is not None:
 			data["coordinates"] = (float(page.coordinates[0]), float(page.coordinates[1]))
-
+	
 		return data
 
 	except exceptions.PageError:
@@ -78,16 +78,20 @@ def main():
 	input_data = open("data/topics/%s.txt" % topic).readlines()
 
 	for line in sorted(input_data):
-		language, title = line.split('\t')[0], line.split('\t')[1].strip()
-		
+		language, title = line.split(',')[0], line.split(',')[1].strip()
+
 		print("\nLanguage:\t", language)
 		print("Title:\t\t", title)
 
+		#if general.check_if_exists(FileType.PROCESSED.value, topic, language):
+			#print("%s has already been processed for %s" % (topic, language))
+
+		#else:
 		data = get_wiki_data(language, title)
 
 		if data != None:	
 
-			if args.save == "y":
+			if args.save_raw == "y":
 				general.save_to_json(topic, language, data, FileType.RAW.value)
 
 			# Preprocess:
@@ -96,10 +100,7 @@ def main():
 			data['images'] = preprocess.preprocess_images(data['images'])
 			data['references'] = preprocess.preprocess_references(data['references'])
 
-			if args.save == "y":
-				general.save_to_json(topic, language, data, FileType.PROCESSED.value)
-
-		print(50*"*")	
+			general.save_to_json(topic, language, data, FileType.PROCESSED.value)
 
 if __name__ == "__main__":
 	main()
