@@ -1,8 +1,17 @@
 #!/usr/bin/python3
 """
-	Parse and clean the edit histories of Wikipedia language versions.
-	Ouput: yield revision history dictionary with clean data. 
-	Fields = tlds_origin, reference_template_types, images, captions, links, categories, sections, content.
+
+	Parses elements of the edit histories of Wikipedia language versions.
+	Output: parsed content from edit histories: 
+		images (list) 
+		text (string)
+		sections and depth (list of list)
+		links (list)
+		categories (list)
+		captions (list)
+		top level domain (Counter)
+		reference template type counts (Counter)
+
 """
 import get_wiki_content
 import nltk

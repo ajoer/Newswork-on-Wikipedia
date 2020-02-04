@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """
-	Quantitatively analyze the edit histories of Wikipedia language versions for newsiness and encyclopedia-ness.
+	Main file for getting and parsing Wikipedia edit histories.
 	Input: txt file with tab separated language, title pairs, e.g. 'refugee_crisis'
-	Ouput: yield revision history dictionary with clean data. 
+	Ouput: saves parsed edit history to json file. 
 	Output fields: tlds_origin, reference_template_types, images, captions, links, categories, sections, content.
 """
 

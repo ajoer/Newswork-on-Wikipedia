@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """
-	Gets page + complete edit history from Wikipedia given language and a topic. 
-	Uses the Wikipedia API.
-	Returns full page + edit history in a Wikipedia page object for the language.
+	Uses the Wikipedia API to get page + complete edit history from Wikipedia given language and a topic. 
+	Relies on the version of the python Wikipedia API wrapper here: github.com/ankajor/Wikipedia.
+	Returns full page + edit history in a Wikipedia page object for the given language.
 """
 
 from urllib.request import urlopen

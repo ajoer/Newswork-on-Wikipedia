@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-	General modules used across MultiLingWiki.
+	General utils for Wikipedia edit history parsing, e.g. save and read form JSON.
 
 """
 import glob
