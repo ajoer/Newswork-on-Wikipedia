@@ -1,7 +1,0 @@
-dn.se
-gp.se
-svd.se
-sydsvenskan.se
-expressen.se
-aftonbladet.se
-svt.se

@@ -18,10 +18,10 @@ def read_from_json(filename):
 		return None
 
 
-def save_to_json(en_title, language, dictionary, filetype): 
+def save_to_json(event, language, dictionary): 
 	''' save JSON dump to file '''
 
-	directory_name = "output/%s/%s/" % (filetype, en_title)
+	directory_name = "../newswork/data/%s/" % event
 
 	try:
 		os.mkdir(directory_name)
@@ -29,13 +29,13 @@ def save_to_json(en_title, language, dictionary, filetype):
 	except FileExistsError:
 		print("Directory %s already exists." % directory_name)
 	
-	file_name = "%s_%s_%s.json" % (en_title, language, filetype)
+	file_name = "%s.json" % language
 	with open(directory_name + file_name, 'w') as outfile:
-		json.dump(dictionary, outfile)
+		json.dump(dictionary, outfile, sort_keys=True, indent=4)
 
-def save_pois_to_tsv(en_title, language, tsv_output, filetype):
+def save_pois_to_tsv(event, language, tsv_output):
 
-	directory_name = "output/%s/%s/tsv/" % (filetype, en_title)
+	directory_name = "newswork/data/%s/tsv/" % event
 
 	try:
 		os.mkdir(directory_name)
@@ -43,32 +43,32 @@ def save_pois_to_tsv(en_title, language, tsv_output, filetype):
 	except FileExistsError:
 		print("Directory %s already exists." % directory_name)
 
-	file_name = "%s_%s_%s.json" % (en_title, language, filetype)
-	file_name = open(directory_name + "%s_%s_%s.json" % (en_title, language, filetype), 'w')
+	file_name = "%s.json" % language
+	file_name = open(directory_name + file_name, 'w')
 
 	file_name.write("%s\t%s\n" % (tsv_output[0][0], tsv_output[0][1]))
 	for (t,p) in sorted(tsv_output[1:], key=lambda x: x[1], reverse=True):
 		file_name.write("%s\t%s\n" % (t, p))
 	file_name.close()
 
-def open_data(filetype, topic):
+def open_data(event):
 
-	input_files = glob.glob("output/%s/%s/*.json" % (filetype, topic))
+	input_files = glob.glob("data/%s/*.json" % event)
 
 	for file_name in sorted(input_files):
 		
 		data = read_from_json(file_name)
-		language = file_name.split('/')[-1].split('_')[-2]
+		language = file_name.split('/')[-1].split('.')[0]
 
 		print("\nLanguage:\t", language)
-		print("Title:\t\t", topic)
+		print("Event:\t\t", event)
 
 		yield data, language
 
-def check_if_exists(filetype, en_title, language):
+def check_if_exists(event, language):
 	
-	directory_name = "output/%s/%s/" % (filetype, en_title)
-	file_name = directory_name + "%s_%s_%s.json" % (en_title, language, filetype)
+	directory_name = "newswork/data/%s/" % event
+	file_name = directory_name + "%s.json" % language
 	
 	return os.path.isfile(file_name)
 

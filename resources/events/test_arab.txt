@@ -1,0 +1,4 @@
+da,Protesterne i den arabiske verden 2010-2011,Dansk,protest
+sv,Arabiska våren,Svenska,spring
+nb,Den arabiske våren,Norsk bokmål,spring
+nl,Arabische Lente,Nederlands,spring
