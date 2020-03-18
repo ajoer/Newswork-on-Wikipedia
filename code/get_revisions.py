@@ -5,7 +5,7 @@
 """
 import argparse
 import utils_io as uio
-import WikiRevisionParser.wikirevparser as wikirevparser
+import wikirevparser
 
 argsparser = argparse.ArgumentParser(description='''Get and parse edit histories of Wikipedia language versions.''')
 argsparser.add_argument("event", help="e.g. 'refugee_crisis'.")

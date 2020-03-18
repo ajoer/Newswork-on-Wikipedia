@@ -15,7 +15,7 @@ import utils_io as uio
 import utils_visualization as uviz
 
 from collections import defaultdict, Counter
-from datetime import datetime
+from datetime import datetime, date
 
 def diff_counters(curr, prev):
 
@@ -90,52 +90,6 @@ class Analyze:
 		self.topic = topic
 		self.timestamps = sorted(list(self.data.keys()))
 		self.dates = self.timestamps
-		#self.daily_data, self.timestamps, self.dates = self._one_edit_per_timestamp(daily)
-		
-	def _timestamp2date(self, timestamp, daily=True):
-		''' Convert timestamps to US datetime format. '''
-		year = timestamp[:4]
-		month = timestamp[5:7]
-
-		if daily:
-			day = timestamp[8:10]
-			date = "%s-%s-%s" % (year, month, day)
-		else:
-			date = timestamp
-			#date = "%s-%s" % (year, month)
-		return date
-
-	def _one_edit_per_timestamp(self, daily=True):
-		''' Filter so revision history has one entry per month or day, i.e. page on YYYY/MM or YYYY/MM/DD.'''
-
-		self.timestamps = [datetime.strptime(ts, "%Y-%m-%dT%H:%M:%SZ") for ts in sorted(list(self.data.keys()))]
-			
-		self.dates = set([self._timestamp2date(ts, daily) for ts in self.timestamps])
-
-		for n in range(1,len(self.dates)):
-			if self.dates[n] == self.dates[n-1]:
-				del self.data[self.timestamps[n-1]]
-
-		self.timestamps = sorted(list(self.data.keys()))
-		self.dates = [self._timestamp2date(timestamp) for timestamp in self.timestamps]
-
-		return self.data, self.timestamps, self.dates
-
-	def _one_edit_per_timespan(self, daily=True):
-		''' Filter so revision history has one entry per month or day, i.e. page on YYYY/MM or YYYY/MM/DD.'''
-
-		self.timestamps = [datetime.strptime(ts, "%Y-%m-%dT%H:%M:%SZ") for ts in sorted(list(self.data.keys()))]
-		per_day = _last_edits_per_day(self.timestamps) 	
-		#self.dates = set([ts.date() for ts in self.timestamps])
-
-		for n in range(1,len(self.dates)):
-			if self.dates[n] == self.dates[n-1]:
-				del self.data[self.timestamps[n-1]]
-
-		self.timestamps = sorted(list(self.data.keys()))
-		self.dates = [self._timestamp2date(timestamp) for timestamp in self.timestamps]
-
-		return self.data, self.timestamps, self.dates
 
 	def _remove_vandalism(self, added_elements, removed_elements):
 
@@ -188,25 +142,24 @@ class Analyze:
 				added, removed = diff_lists(curr, prev)
 				added_elements[self.timestamps[n]] = added
 				removed_elements[self.timestamps[n]] = removed
-				# added_elements[self.dates[n]] = added
-				# removed_elements[self.dates[n]] = removed
 
 				if len(added) == 0: added_counts.append(0)
-				else: added_counts.append(len(added)) #/curr_total)
+				else: added_counts.append(len(added))
 				if len(removed) == 0: removed_counts.append(0)
-				else: removed_counts.append(-len(removed)) #/curr_total)
+				else: removed_counts.append(-len(removed))
 
 		if remove_vandalism:
 			added_elements, removed_elements = self._remove_vandalism(added_elements, removed_elements)
 
 		if visualize:
 			y = [datetime.strptime(ts, "%Y-%m-%dT%H:%M:%SZ") for ts in self.timestamps]
-			uviz.plot_barchart(y, added_counts, removed_counts, self.topic, self.language, element_type)
+			uviz.plot_changes(y, added_counts, removed_counts, total_counts, self.topic, self.language, element_type)
 
 		return added_counts, removed_counts, total_counts
 
 	def string_development(self, element_type, visualize=False):
 
+		# todo: remove vandalism. If x_t == x_t+2, remove x_t and x_t1
 		added = []
 		removed = []
 		totals = []
@@ -242,7 +195,8 @@ class Analyze:
 					removed.append(0)
 
 		if visualize:
-			uviz.plot_barchart(self.dates, added, removed, self.topic, self.language, element_type)
+			y = [datetime.strptime(ts, "%Y-%m-%dT%H:%M:%SZ") for ts in self.timestamps]
+			uviz.plot_changes(y, added, removed, totals, self.topic, self.language, element_type)
 
 		return added, removed, totals
 
