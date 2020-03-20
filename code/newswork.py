@@ -34,11 +34,10 @@ parser.add_argument("--visualize", default="n", help="e.g. 'y' (for debugging)."
 
 args = parser.parse_args()
 
-elements = ["content"] #,"links", "urls"] # "images", "categories"]
-languages = [l for l in uio.get_language(args.topic)] #["sv", "da", "de", "sv", "es", "fr", "nb", "nl", "en"] # 
-#half = round(len(languages))
-#languages = languages[:half]
-comparative_languages = ['ja', 'it', 'ko', 'de', 'ru', 'fr', 'zh']
+elements = ["content", "links", "urls"] # "images", "categories"]
+languages = [l for l in uio.get_language(args.topic)] 
+
+comparative_languages = languages #['ja', 'it', 'ko', 'de', 'ru', 'fr', 'zh']
 all_languages_totals = OrderedDict()
 total_added = OrderedDict()
 total_removed = OrderedDict()

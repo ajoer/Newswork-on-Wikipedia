@@ -1,11 +1,12 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
 """
 	Get and parse Wikipedia revision histories from selected languages on a topic. 
 	Ouput: JSON with parsed and tokenized revision histories. One file per language.
 """
 import argparse
 import utils_io as uio
-import wikirevparser
+from WikiRevParser.wikirevparser import wikirevparser
 
 argsparser = argparse.ArgumentParser(description='''Get and parse edit histories of Wikipedia language versions.''')
 argsparser.add_argument("event", help="e.g. 'refugee_crisis'.")
@@ -19,8 +20,10 @@ def get_data():
 	input_data = open("resources/events/%s.txt" % args.event).readlines()
 
 	for line in sorted(input_data):
-		language, title = line.split('\t')[0], line.split('\t')[1].strip()
-		
+		try:
+			language, title = line.split('\t')[0], line.split('\t')[1].strip()
+		except IndexError:
+			language, title = line.split(',')[0], line.split(',')[1].strip()
 		if args.language:
 			if language != args.language: continue
 
