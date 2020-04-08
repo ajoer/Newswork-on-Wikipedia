@@ -92,7 +92,6 @@ def plot_article_development(dates, elements, titles, topic, language, analysis)
 	plt.savefig(directory_name + file_name)
 
 	plt.close()
-
 def plot_element_across_languages(dates, data, element, languages, topic):
 
 	fig, ax = plt.subplots()
@@ -115,13 +114,13 @@ def plot_element_across_languages(dates, data, element, languages, topic):
 
 	#plt.xticks(labels, rotation = 45)
 	plt.tight_layout()
-	plt.show()
-	# directory_name = "visualizations/%s/%s/" % (topic, analysis)
-	# uio.mkdirectory(directory_name)
-	# file_name = "%s.png" % language
-	# plt.savefig(directory_name + file_name)
+	#plt.show()
+	directory_name = "visualizations/%s/%s/" % (topic, element)
+	uio.mkdirectory(directory_name)
+	file_name = "comparative.png"
+	plt.savefig(directory_name + file_name)
 
-	# plt.close()
+	plt.close()
 
 if __name__ == "__main__":
 	plot_barchart()
