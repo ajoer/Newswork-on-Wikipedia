@@ -69,7 +69,7 @@ def open_file(event, language):
 
 def check_if_exists(event, language):
 	
-	directory_name = "data/%s/" % event
+	directory_name = "data/covid19/%s/" % event
 	file_name = directory_name + "%s.json" % language
 	
 	return os.path.isfile(file_name)
