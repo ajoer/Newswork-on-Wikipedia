@@ -1,6 +1,8 @@
 # RevisionAnalysis
 
-This repository contains code to process the output of the WikiRevParser for temporal and cross-cultural analysis of Wikipedia articles in different languages. General for all workflows is that the data is extracted from Wikipedia using my forked and re-worked version of the Wikipedia API wrapper and parsed using my WikiRevParser package (pip install it here from PyPI). The extracted and parsed data is then analysed for the purpose of researching cross-cultural differences in the representation of an event over time. Most of my work on this has been concerned with the COVID-19 pandemic, which is also reflected in the code. The code is project specific but can easily be re-appropriated to fit other project needs. The code is open source and free to use under the MIT license.
+This repository contains code to process the output of the WikiRevParser for temporal and cross-cultural analysis of Wikipedia articles in different languages. 
+
+General for all workflows is that the data is extracted from Wikipedia using my forked and re-worked version of the [Wikipedia API wrapper](https://github.com/ajoer/Wikipedia) and parsed using my [WikiRevParser package](https://github.com/ajoer/WikiRevParser) (pip install it here from [PyPI](https://pypi.org/project/wikirevparser/)). The extracted and parsed data is then analysed for the purpose of researching cross-cultural differences in the representation of an event over time. Most of my work on this has been concerned with the COVID-19 pandemic, which is also reflected in the code. The code is project specific but can easily be re-appropriated to fit other project needs. The code is open source and free to use under the MIT license.
 
 ## Repository overview
 The repository is structured as follows:
@@ -27,8 +29,22 @@ NB: "event" refers to the Wikipedia article topic, and is generally the event na
 ## Visualization output examples
 
 The repository can create many different types of visualizations. Here are a few examples:
-1. Compare the roles of different Wikipedian types (anonymous, bots, regitered users) in the creation or deletion of content over time. Here are the outputs for French on the COVID-19 pandemic page.
+1. Compare the roles of different Wikipedian types (anonymous, bots, regitered users) in the creation or deletion of content over time. 
+Here are the outputs for French on the COVID-19 pandemic page.
 
-2. for cross-cultural comparison of the content magnitude trajectory over time for a page. Compare here the difference between the Hebrew and Dutch COVID-19 pandemic pages.
+![French additions](/visualizations/covid19/additions_deletions/fr_additions.png)
+![French deletions](/visualizations/covid19/additions_deletions/fr_deletions.png)
 
-3. The types of Wikipedians and the different types of edits they do over time. Here you see the visualization for the Arabic COVID-19 Wikipedia page.
+2. Perform cross-cultural comparison of the content magnitude trajectory over time for a page. 
+Compare here the difference between the Hebrew and Dutch COVID-19 pandemic pages.
+
+![Hebres](/visualizations/covid19/content_magnitude/continuous/he.png)
+![Dutch](/visualizations/covid19/content_magnitude/decrease/nl.png)
+
+3. Analyze the types of Wikipedians and the different types of edits they do over time. 
+Here you see the visualization for the Arabic COVID-19 Wikipedia page.
+
+![Arabic](/visualizations/covid19/wikipedian_edittypes/ar.png)
+
+## Acknowledgements
+This project has received funding from the European Union’s Horizon 2020 research and innovation programme under the Marie Skłodowska-Curie grant agreement No 812997.
