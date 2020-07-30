@@ -1,0 +1,6 @@
+de	Coronavirus-Epidemie 2019/2020
+it	Epidemia di COVID-19 del 2019-2020
+ja	2019年-2020年中国武漢における肺炎の流行
+ko	코로나바이러스감염증-19 유행
+ru	Вспышка COVID-19
+zh	2019冠狀病毒病疫情

@@ -1,0 +1,28 @@
+#Names of Wikipedia articles in multiple languages
+event_title_in_wikipedia = """
+SELECT DISTINCT ?lang ?name WHERE {
+  ?article schema:about wd:Q33761 ;  
+           schema:inLanguage ?lang ;
+           schema:name ?name ;
+           schema:isPartOf [ wikibase:wikiGroup "wikipedia" ] .
+  FILTER (!CONTAINS(?name, ':')) .
+}
+"""
+
+
+
+# Input: "rigshospitalet", output: lat.value(), lon.value()
+get_coordinates = """ 
+SELECT ?lat ?lon WHERE {
+  
+  wd:Q3357360 p:P625 ?statement.
+  ?statement psv:P625 ?node.
+  ?node wikibase:geoLatitude ?lat.
+  ?node wikibase:geoLongitude ?lon.
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+}
+"""
+
+# input "rigshospitalet", output: wikidata ID
+get_ID_for_search_term = 
+"https://en.wikipedia.org/w/api.php?action=query&prop=pageprops&titles=%s&format=json" % "rigshospitalet"

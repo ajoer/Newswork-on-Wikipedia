@@ -1,127 +1,89 @@
 #!/usr/bin/python3
 """
-	Visualization utils for newswork analysis module.
+	Visualization utils for revision analysis.
 """
 import matplotlib.pyplot as plt
-import matplotlib._color_data as mcd
-import numpy as np
+import plotly.graph_objects as go
 import utils_io as uio
 
-from datetime import datetime
-from sklearn.preprocessing import Normalizer
+def plot_wikipedian_edittypes(wikipedian_edittypes, timestamps, topic, language):
 
-#colors = ["indianred", "goldenrod", "steelblue", "darkolivegreen", "purple", "red", "blue", "green", "orange", "yellow","indianred", "goldenrod", "steelblue", "darkolivegreen", "purple", "red", "blue", "green", "orange", "yellow","indianred", "goldenrod", "steelblue", "darkolivegreen", "purple", "red", "blue", "green", "orange", "yellow","indianred", "goldenrod", "steelblue", "darkolivegreen", "purple", "red", "blue", "green", "orange", "yellow"]
-colors = ["indianred", "steelblue", "darkolivegreen", "purple", "yellow", "black", "orange"] #[mcd.XKCD_COLORS[c] for c in mcd.XKCD_COLORS]
-linestyles = ["solid", "dotted"]
-
-def get_RAWgraph_area_data(all_keys, input_dict):
-	print("date\tkey\tvalue")
-
-	for date in input_dict:
-		for key in all_keys:
-			if key in input_dict[date]:
-				print(date, "\t", key, "\t", input_dict[date][key])
-			else:
-				print(date, "\t", key, "\t", 0)
-
-def get_RAWgraph_barchart_data(input_dict, change_type):
-	print("date\tkey\tvalue")
-
-	for date in input_dict:
-		print(date, "\t", change_type, "\t", input_dict[date])
-
-def plot_changes(dates, added, removed, totals, topic, language, analysis):
-	''' Plot changes to elements in revision history. ''' 
-	# scale values for comparative visual analysis across languages doesn't work for some reason
-	#added_transformed = Normalizer().fit_transform(np.array(added).reshape(1, -1))
-	#removed_transformed = Normalizer().fit_transform(np.array(removed).reshape(1, -1))
+	wikipedian_edit_style = {
+		"anon_content": ["indianred", "dashed"],
+		"anon_editorial": ["indianred", "dotted"],
+		"reg_content": ["steelblue", "dashed"],
+		"reg_editorial": ["steelblue", "dotted"],
+		"bot_content": ["darkolivegreen", "dashed"],
+		"bot_editorial": ["darkolivegreen", "dotted"]
+	}
 
 	fig, ax = plt.subplots()
-	#plt.xlabel("Time")
-	#plt.ylabel("Normalized values")
-	added_transformed = Normalizer().fit_transform(np.array(added).reshape(1, -1))
-	removed_transformed = Normalizer().fit_transform(np.array(removed).reshape(1, -1))
-	totals_transformed = Normalizer().fit_transform(np.array(totals).reshape(1, -1))
-	ax.plot(dates, added_transformed.transpose(), linestyle=linestyles[1], color=colors[0])
-	ax.plot(dates, removed_transformed.transpose(), linestyle=linestyles[1], color=colors[0])
-	ax.plot(dates, totals_transformed.transpose(), linestyle=linestyles[0], color=colors[1])
-	#ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+	for w_e in wikipedian_edittypes:
+		ax.plot(timestamps, wikipedian_edittypes[w_e], color=wikipedian_edit_style[w_e][0], linestyle=wikipedian_edit_style[w_e][1], label=" ".join(w_e.split("_")))
+	ax.tick_params(labelbottom=False)
+	# Shrink current axis's height by 10% on the bottom
+	box = ax.get_position()
+	ax.set_position([box.x0, box.y0 + box.height * 0.1,
+	                 box.width, box.height * 0.9])
 
-	#labels = [dates[0], dates[len(dates)/4], dates[len(dates)/2], dates[(len(dates)/4)*3], dates[-1]] #[dates[0]]+[x for n,x in enumerate(dates) if float(n) in [round(x) for x in np.arange(0+(len(dates)-2)/10, len(dates)-1, 10)]]+[dates[-1]]
-	plt.xticks(rotation = 90)
-	plt.tight_layout()
+	# Put a legend below current axis
+	ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05),
+	          fancybox=True, shadow=True, ncol=3)
 
-	directory_name = "visualizations/%s/%s/" % (topic, analysis)
+	directory_name = "visualizations/%s/wikipedian_edittypes/" % topic
 	uio.mkdirectory(directory_name)
 	file_name = "%s.png" % language
 	plt.savefig(directory_name + file_name)
-
 	plt.close()
- 
-def plot_article_development(dates, elements, titles, topic, language, analysis):
-	
+
+def plot_content_magnitude(content_sizes, timestamps, topic, language):
 	fig, ax = plt.subplots()
-	#plt.xlabel('Time')
+	ax.plot(timestamps, content_sizes, color="orange", label="content magnitude")
+	ax.tick_params(labelbottom=False)
+	ax.legend()
 
-	for n, element in enumerate(elements):
-		if len(element) == 2: # For addition/removal development visualization: [ [1, 0, 0, 2, 0], [0, 0, -3, 0, 0] ]
-			#plt.ylabel('Values')
-
-			# scale for comparitive visual analysis between languages
-			X0_transformed = Normalizer().fit_transform(np.array(element[0]).reshape(1, -1))
-			X1_transformed = Normalizer().fit_transform(np.array(element[1]).reshape(1, -1))
-	
-			ax.plot(dates, X0_transformed.transpose(), label="+ %s" % titles[n], linestyle=linestyles[0], color=colors[n])
-			ax.plot(dates, X1_transformed.transpose(), label="- %s" % titles[n], linestyle=linestyles[1], color=colors[n])
-						
-		else: # For general article development visualization: [1, 0, 0, 2, 0]
-			#plt.ylabel('Normalized values')
-			# normalize values to same space:
-			# NB: also doesn't work
-			X_transformed = Normalizer().fit_transform(np.array(element).reshape(1, -1))
-			ax.plot(dates, X_transformed.transpose(), label=titles[n], linestyle=linestyles[0], color=colors[n])
-		#ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
-
-	#labels = [dates[0], dates[len(dates)/4], dates[len(dates)/2], dates[(len(dates)/4)*3], dates[-1]] #[dates[0]]+[x for n,x in enumerate(dates) if float(n) in [round(x) for x in np.arange(0+(len(dates)-2)/10, len(dates)-1, 10)]]+[dates[-1]]
-	plt.xticks(rotation = 90)
-	plt.tight_layout()
-
-	directory_name = "visualizations/%s/%s/" % (topic, analysis)
+	directory_name = "visualizations/%s/content_magnitude/" % topic
 	uio.mkdirectory(directory_name)
 	file_name = "%s.png" % language
 	plt.savefig(directory_name + file_name)
-
 	plt.close()
-def plot_element_across_languages(dates, data, element, languages, topic):
 
-	fig, ax = plt.subplots()
-	#plt.xlabel('time')
-	#plt.title("%s" % element)
+def plot_additions_deletions_per_wikipediantype(data, timestamps, topic, language):
 
-	#label_dates = []
-	for n, lang_data in enumerate(data):
+	for (change,endings) in [("additions", "add"), ("deletions", "del")]:
 
-		language = languages[n]
-		# get dates for labels:
-		#lang_dates = [datetime.strptime(ts, "%Y-%m-%dT%H:%M:%SZ") for ts in dates[languages[n]]]
-		#label_dates += lang_dates
+		fig, ax = plt.subplots()
+		ax.plot(timestamps, data[f"registered_{endings}"], label="registered")
+		ax.plot(timestamps, data[f"anonymous_{endings}"], label="anonymous")
+		ax.plot(timestamps, data[f"bot_{endings}"], label="bots")
+		ax.legend()
 
-		# normalize values to same space:
-		X_transformed = Normalizer().fit_transform(np.array(lang_data).reshape(1, -1)) #, np.array(lang_dates))
-		#plt.ylabel('values')
-		ax.plot(dates[language], X_transformed.transpose(), label=language, color=colors[n]) #lang_dates
-		ax.legend(loc='best') #'center left', bbox_to_anchor=(1, 0.5))
+		directory_name = f"visualizations/{topic}/additions_deletions/"
+		uio.mkdirectory(directory_name)
+		file_name = f"{language}_{change}.png"
+		plt.savefig(directory_name + file_name)
+		plt.close()
 
-	#plt.xticks(labels, rotation = 45)
-	plt.tight_layout()
-	#plt.show()
-	directory_name = "visualizations/%s/%s/" % (topic, element)
-	uio.mkdirectory(directory_name)
-	file_name = "comparative.png"
-	plt.savefig(directory_name + file_name)
+def plot_creation_time(creation_dates, LVs, colors, continents):
 
-	plt.close()
+	fig = go.Figure()
+	fig.add_trace(go.Scatter(
+	    x=creation_dates,
+	    y=LVs,
+	    mode="markers",
+	    marker=dict(color=colors, size=8),
+	    text=continents
+	))
+	
+	fig.update_layout(
+		title="Date of page creation",
+	    xaxis_title="Date",
+	    yaxis_title="Language Version",
+	    yaxis_dtick = 1
+  	)
+
+	fig.write_html("visualizations/creation_times.html")
 
 if __name__ == "__main__":
-	plot_barchart()
-	plot_article_development()
+	plot_over_time()
+	plot_content_development()
