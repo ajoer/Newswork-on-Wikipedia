@@ -1,6 +1,6 @@
 # RevisionAnalysis
 
-This repository contains code to process the output of the WikiRevParser for temporal and cross-cultural analysis of Wikipedia articles in different languages. 
+This repository contains code to process the output of the [WikiRevParser](https://github.com/ajoer/WikiRevParser) for temporal and cross-cultural analysis of Wikipedia articles in different languages. 
 
 General for all workflows is that the data is extracted from Wikipedia using my forked and re-worked version of the [Wikipedia API wrapper](https://github.com/ajoer/Wikipedia) and parsed using my [WikiRevParser package](https://github.com/ajoer/WikiRevParser) (pip install it here from [PyPI](https://pypi.org/project/wikirevparser/)). The extracted and parsed data is then analysed for the purpose of researching cross-cultural differences in the representation of an event over time. Most of my work on this has been concerned with the COVID-19 pandemic, which is also reflected in the code. The code is project specific but can easily be re-appropriated to fit other project needs. The code is open source and free to use under the MIT license.
 
