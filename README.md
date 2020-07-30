@@ -33,7 +33,13 @@ All files can be run with python3 (tested). Comparability with earlier versions 
     $ python3 location_specific/covid19_v2.py event --language --check_os
     $ python3 location_specific/covid19_analyse.py event --language --check_os
    
-  
-## Dictionary
+NB: "event" refers to the Wikipedia article topic, and is generally the event name in English, e.g. "arab_spring", "covid19", or "refugee_crisis". 
 
-"event" refers to the Wikipedia article topic, and is generally the event name in English, e.g. "arab_spring", "covid19", or "refugee_crisis". 
+## Visualization output examples
+
+The repository can create many different types of visualizations. Here are a few examples:
+1. Compare the roles of different Wikipedian types (anonymous, bots, regitered users) in the creation or deletion of content over time. Here are the outputs for French on the COVID-19 pandemic page.
+
+2. for cross-cultural comparison of the content magnitude trajectory over time for a page. Compare here the difference between the Hebrew and Dutch COVID-19 pandemic pages.
+
+3. The types of Wikipedians and the different types of edits they do over time. Here you see the visualization for the Arabic COVID-19 Wikipedia page.
